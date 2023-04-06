@@ -13,7 +13,7 @@
   *     npm install cors --save
   * 
   * Body-Parser - Dependência que gerencia o corpo das requisições
-  *     npm install body-parser --save ela quer dar
+  *     npm install body-parser --save
   */
 // Import das dependecias do projeto
 
@@ -28,9 +28,9 @@ const bodyParser = require('body-parser');
 
 const { request, response } = require('express');
 
-const listaCursos = require('./back/module/modulo.js')
-const listaAlunos = require('./back/module/modulo.js');
-const alunos = require('./back/json/alunos.js');
+const listaCursos = require('./module/modulo.js')
+const listaAlunos = require('./module/modulo.js');
+const alunos = require('./json/alunos.js');
 
 // Cria um objeto com características express
 const app = express();

@@ -1,1 +1,1 @@
-# projeto-lion-school-back
+# back-end-projeto-lion

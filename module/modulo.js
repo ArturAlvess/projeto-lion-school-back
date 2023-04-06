@@ -5,9 +5,9 @@
  * Version 1.0
  ****/
 
- var listaCursos = require('./json/cursos.js')
- var listaAlunos = require('./json/alunos.js');
-const alunos = require('./json/alunos.js');
+ var listaCursos = require('../json/cursos.js')
+ var listaAlunos = require('../json/alunos.js');
+const alunos = require('../json/alunos.js');
 
  const getListaCursos = function(){
     return listaCursos;

@@ -13,7 +13,7 @@
   *     npm install cors --save
   * 
   * Body-Parser - Dependência que gerencia o corpo das requisições
-  *     npm install body-parser --save
+  *     npm install body-parser --save ela quer dar
   */
 // Import das dependecias do projeto
 

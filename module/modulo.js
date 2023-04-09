@@ -107,7 +107,8 @@ console.log(getAlunosCurso('DS'))
          listaDadosAlunoJSON.matricula = lista.matricula;
          listaDadosAlunoJSON.sexo = lista.sexo;
          listaDadosAlunoJSON.status = lista.status,
-         listaDadosAlunoJSON.curso = lista.curso[0].nome
+         listaDadosAlunoJSON.curso = lista.curso[0].nome,
+         listaDadosAlunoJSON.dataConclusao = lista.curso[0].conclusao;
 
          informacoes.push(listaDadosAlunoJSON)
 

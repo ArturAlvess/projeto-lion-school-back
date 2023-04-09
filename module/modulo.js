@@ -74,7 +74,10 @@ const alunos = require('../json/alunos.js');
          listaDadosAlunoJSON.foto = lista.foto;
          listaDadosAlunoJSON.nome = lista.nome;
          listaDadosAlunoJSON.matricula = lista.matricula;
-         listaDadosAlunoJSON.sexo = lista.sexo;
+         listaDadosAlunoJSON.sexo = lista.sexo,
+         listaDadosAlunoJSON.status = lista.status,
+         listaDadosAlunoJSON.curso = lista.curso[0].nome,
+         listaDadosAlunoJSON.dataConclusao = lista.curso[0].conclusao
 
          informacoes.push(listaDadosAlunoJSON)
 
@@ -103,7 +106,8 @@ console.log(getAlunosCurso('DS'))
          listaDadosAlunoJSON.nome = lista.nome;
          listaDadosAlunoJSON.matricula = lista.matricula;
          listaDadosAlunoJSON.sexo = lista.sexo;
-         listaDadosAlunoJSON.status = lista.status
+         listaDadosAlunoJSON.status = lista.status,
+         listaDadosAlunoJSON.curso = lista.curso[0].nome
 
          informacoes.push(listaDadosAlunoJSON)
 

@@ -22,8 +22,9 @@ const alunos = require('../json/alunos.js');
     listaAlunos.alunos.forEach(function(aluno){
         listaDadosAlunoJSON = {}
 
-        listaDadosAlunoJSON.foto = aluno.foto;
+        
         listaDadosAlunoJSON.nome = aluno.nome;
+        listaDadosAlunoJSON.foto = aluno.foto;
         listaDadosAlunoJSON.matricula = aluno.matricula;
         listaDadosAlunoJSON.sexo = aluno.sexo;
 
@@ -47,8 +48,9 @@ const alunos = require('../json/alunos.js');
       if(aluno.matricula == alunoMatricula){
          listaDadosAlunoJSON = {}
 
-         listaDadosAlunoJSON.foto = aluno.foto;
+         
          listaDadosAlunoJSON.nome = aluno.nome;
+         listaDadosAlunoJSON.foto = aluno.foto;
          listaDadosAlunoJSON.matricula = aluno.matricula;
          listaDadosAlunoJSON.sexo = aluno.sexo;
 
@@ -71,8 +73,9 @@ const alunos = require('../json/alunos.js');
 
          listaDadosAlunoJSON = {}
 
-         listaDadosAlunoJSON.foto = lista.foto;
+         
          listaDadosAlunoJSON.nome = lista.nome;
+         listaDadosAlunoJSON.foto = lista.foto;
          listaDadosAlunoJSON.matricula = lista.matricula;
          listaDadosAlunoJSON.sexo = lista.sexo,
          listaDadosAlunoJSON.status = lista.status,
@@ -102,8 +105,9 @@ console.log(getAlunosCurso('DS'))
 
          listaDadosAlunoJSON = {}
 
-         listaDadosAlunoJSON.foto = lista.foto;
+         
          listaDadosAlunoJSON.nome = lista.nome;
+         listaDadosAlunoJSON.foto = lista.foto;
          listaDadosAlunoJSON.matricula = lista.matricula;
          listaDadosAlunoJSON.sexo = lista.sexo;
          listaDadosAlunoJSON.status = lista.status,

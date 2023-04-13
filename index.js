@@ -32,6 +32,7 @@ const listaCursos = require('./module/modulo.js')
 const listaAlunos = require('./module/modulo.js');
 const alunos = require('./json/alunos.js');
 const funcoes = require('./module/modulo.js');
+const { cursos } = require('./json/cursos.js');
 
 // Cria um objeto com características express
 const app = express();
@@ -74,29 +75,45 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
     let siglaCurso = request.query.sigla;
     let statusAluno = request.query.status;
 
-    if (siglaCurso != undefined && statusAluno == undefined) {
-        if (siglaCurso == '' || siglaCurso == undefined || !isNaN(siglaCurso)) {
-            statusCode = 400;
-            dadosSiglaCurso.messsage = 'Sigla do curso inválida! Verifique se a mesma está correta.'
-        } else {
-            aluno = listaAlunos.getAlunosCurso(siglaCurso)
-        }
-
-    } else if (statusAluno != undefined && siglaCurso == undefined) {
+    // Filtrar por status
+    if (statusAluno != undefined && cursos == undefined) {
         if (statusAluno == '' || statusAluno == undefined || !isNaN(statusAluno)) {
             statusCode = 400;
-            dadosStatusAluno.messsage = 'Status do aluno inválido, verifique se o mesmo está correto.'
+            dadosStatusAluno.messsage = 'Status do aluno inválido! Verifique se a mesma está correta.'
+        } else {
+            aluno = funcoes.getStatusAluno(statusAluno, listaAlunos.alunos)
+        }
+        if (alunos) {
+            statusCode = 200
+            dadosAluno = aluno
+        } else {
+            statusCode = 500
+        }
+
+        // Filtrar por curso
+    } else if (siglaCurso != undefined && statusAluno == undefined) {
+        if (siglaCurso == '' || siglaCurso == undefined || !isNaN(siglaCurso)) {
+            statusCode = 400;
+            dadosSiglaCurso.messsage = 'Status do aluno inválido, verifique se o mesmo está correto.'
 
         } else {
-            aluno = listaAlunos.getStatusAluno(statusAluno)
+            aluno = listaAlunos.getAlunosCurso(cursos, listaAlunos.alunos)
         }
+
+        if (alunos) {
+            statusCode = 200
+            dadosAluno = aluno
+        } else {
+            statusCode = 500
+        }
+
     }else if(siglaCurso != undefined && statusAluno != undefined){
         if (siglaCurso == '' || !isNaN(siglaCurso) || statusAluno == '' || !isNaN(statusAluno)) {
             statusCode = 400;
-            dadosSiglaCurso.messsage = 'Sigla do curso ou status inválido! Verifique se a mesma está correta.'
+            dadosAluno.messsage = 'Sigla do curso ou status inválido! Verifique se a mesma está correta.'
         } else {
-            let alunosCurso = funcoes.getAlunosCurso(siglaCurso)
-            alunos = funcoes.getStatusAluno(statusAluno)
+            let alunosCurso = funcoes.getAlunosCurso(siglaCurso, listaAlunos.alunos)
+            alunos = funcoes.getStatusAluno(statusAluno, alunosCurso.aluno)
 
             if (alunos) {
                 statusCode = 200

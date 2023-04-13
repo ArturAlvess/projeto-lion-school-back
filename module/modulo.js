@@ -61,67 +61,54 @@ const alunos = require('../json/alunos.js');
  
  }
 
- const getAlunosCurso = function(cursoSigla){
+ const getAlunosCurso = function(cursoSigla, listaAlunos){
+   const cursoUpper = cursoSigla.toUpperCase();
+   const alunoJson = {};
+   const alunosArray = [];
+   let status = false;
 
-   listaDadosAlunoJSON = false;
-    let siglaCurso = cursoSigla;
-    let alunos = {}
-    let informacoes = []
-
-    listaAlunos.alunos.forEach(function(lista){
-       if(siglaCurso.toUpperCase() == lista.curso[0].sigla.toUpperCase()){
-
-         listaDadosAlunoJSON = {}
-
-         
-         listaDadosAlunoJSON.nome = lista.nome;
-         listaDadosAlunoJSON.foto = lista.foto;
-         listaDadosAlunoJSON.matricula = lista.matricula;
-         listaDadosAlunoJSON.sexo = lista.sexo,
-         listaDadosAlunoJSON.status = lista.status,
-         listaDadosAlunoJSON.curso = lista.curso[0].nome,
-         listaDadosAlunoJSON.dataConclusao = lista.curso[0].conclusao
-
-         informacoes.push(listaDadosAlunoJSON)
+   listaAlunos.forEach(aluno => {
+       let alunos = {};
+       if (aluno.curso[0].sigla.toUpperCase() == cursoUpper) {
+           if (cursoUpper == "DS") {
+               alunoJson.NomeCurso = "Técnico em Desenvolvimento de Sistemas"
+           } else {
+               alunoJson.NomeCurso = "Técnico em Redes de Computadores"
+           }
+           alunos = aluno
+           alunosArray.push(alunos);
+           status = true;
 
        }
-    })
-    alunos = {
-       informacoes
-    }
-    return alunos
+   })
+
+   if (status) {
+       alunoJson.aluno = alunosArray
+       return alunoJson
+   } else {
+       return status;
+   }
 
  }
- const getStatusAluno = function(status){
+ const getStatusAluno = function(statusAluno, listaAlunos){
 
-   listaDadosAlunoJSON = false;
-   let statusAluno = status;
-   let alunos = {}
-   let informacoes = []
+   const statusAlunoUpper = statusAluno.toUpperCase()
+   const alunoJson = {};
+   const alunosArray = [];
+   let status = false;
 
-   listaAlunos.alunos.forEach(function(lista){
-      if(statusAluno.toUpperCase() == lista.status.toUpperCase()){
+   listaAlunos.forEach(aluno => {
+       let alunos = {};
+       if (aluno.status.toUpperCase() == statusAlunoUpper) {
+           alunos = aluno;
+           alunosArray.push(aluno);
+           status = true;
 
-         listaDadosAlunoJSON = {}
-
-         
-         listaDadosAlunoJSON.nome = lista.nome;
-         listaDadosAlunoJSON.foto = lista.foto;
-         listaDadosAlunoJSON.matricula = lista.matricula;
-         listaDadosAlunoJSON.sexo = lista.sexo;
-         listaDadosAlunoJSON.status = lista.status,
-         listaDadosAlunoJSON.curso = lista.curso[0].nome,
-         listaDadosAlunoJSON.dataConclusao = lista.curso[0].conclusao;
-
-         informacoes.push(listaDadosAlunoJSON)
-
-      }
-
+       }
    })
-   alunos = {
-      informacoes
-   }
-   return alunos
+
+   alunoJson.aluno = alunosArray
+   return alunoJson
  }
 
  module.exports = {

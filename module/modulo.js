@@ -92,7 +92,6 @@ const alunos = require('../json/alunos.js');
     return alunos
 
  }
-console.log(getAlunosCurso('DS'))
  const getStatusAluno = function(status){
 
    listaDadosAlunoJSON = false;

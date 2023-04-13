@@ -31,6 +31,7 @@ const { request, response } = require('express');
 const listaCursos = require('./module/modulo.js')
 const listaAlunos = require('./module/modulo.js');
 const alunos = require('./json/alunos.js');
+const funcoes = require('./module/modulo.js');
 
 // Cria um objeto com características express
 const app = express();
@@ -88,6 +89,21 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
 
         } else {
             aluno = listaAlunos.getStatusAluno(statusAluno)
+        }
+    }else if(siglaCurso != undefined && statusAluno != undefined){
+        if (siglaCurso == '' || !isNaN(siglaCurso) || statusAluno == '' || !isNaN(statusAluno)) {
+            statusCode = 400;
+            dadosSiglaCurso.messsage = 'Sigla do curso ou status inválido! Verifique se a mesma está correta.'
+        } else {
+            let alunosCurso = funcoes.getAlunosCurso(siglaCurso, listaAlunos.alunos)
+            alunos = funcoes.getStatusAluno(statusAluno, alunosCurso.aluno)
+
+            if (alunos) {
+                statusCode = 200
+                dadosAluno = aluno
+            } else {
+                statusCode = 500
+            }
         }
     } else{
         aluno = listaAlunos.getListaAlunos()

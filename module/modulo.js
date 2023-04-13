@@ -119,8 +119,11 @@ const getAlunosCurso = function (cursoSigla) {
    }
    return alunos
 
+
 }
-const getStatusAluno = function (status) {
+ 
+ const getStatusAluno = function(status){
+
 
    listaDadosAlunoJSON = false;
    let statusAluno = status;

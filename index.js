@@ -29,10 +29,8 @@ const bodyParser = require('body-parser');
 const { request, response } = require('express');
 
 const listaCursos = require('./module/modulo.js')
-const listaDeAlunos = require('./module/modulo.js');
+const listaAlunos = require('./module/modulo.js');
 const alunos = require('./json/alunos.js');
-const funcoes = require('./module/modulo.js');
-const { cursos } = require('./json/cursos.js');
 
 // Cria um objeto com características express
 const app = express();
@@ -67,76 +65,43 @@ app.get('/v1/lion-school/cursos', cors(), async function (request, response, nex
 })
 
 app.get('/v1/lion-school/alunos', cors(), async function (request, response, next) {
+    let statusCode;
+
+    let aluno;
     let dadosAluno = {}
-    let statusCode
-    let alunos
-    let status = request.query.status
-    let curso = request.query.curso
 
-    //Filtrar por status
-    if (status != undefined && curso == undefined) {
+    let siglaCurso = request.query.sigla;
+    let statusAluno = request.query.status;
 
-        if (!isNaN(status)) {
-            statusCode = 400
-            dadosAluno.message = 'Não foi possivel processar pois os dados de entrada que foram enviados não corresponde ao exigido, confira o valor, pois não pode ser vazio e precisa ser caracteres'
+    if (siglaCurso != undefined) {
+        if (siglaCurso == '' || siglaCurso == undefined || !isNaN(siglaCurso)) {
+            statusCode = 400;
+            dadosSiglaCurso.messsage = 'Sigla do curso inválida! Verifique se a mesma está correta.'
         } else {
-            alunos = funcoes.getStatusAluno(status, listaDeAlunos.alunos)
+            aluno = listaAlunos.getAlunosCurso(siglaCurso)
         }
 
-        if (alunos) {
-            statusCode = 200
-            dadosAluno = alunos
+    } else if (statusAluno != undefined) {
+        if (statusAluno == '' || statusAluno == undefined || !isNaN(statusAluno)) {
+            statusCode = 400;
+            dadosStatusAluno.messsage = 'Status do aluno inválido, verifique se o mesmo está correto.'
+
         } else {
-            statusCode = 400
+            aluno = listaAlunos.getStatusAluno(statusAluno)
         }
-
-        //Filtrar por curso
-    } else if (curso != undefined && status == undefined) {
-
-        if (!isNaN(curso)) {
-            statusCode = 400
-            dadosAluno.message = 'Não foi possivel processar pois os dados de entrada que foram enviados não corresponde ao exigido, confira o valor, pois não pode ser vazio e precisa ser caracteres'
-        } else {
-            alunos = funcoes.getAlunosCurso(curso, listaDeAlunos.alunos)
-        }
-
-        if (alunos) {
-            statusCode = 200
-            dadosAluno = alunos
-        } else {
-            statusCode = 400
-        }
-
-    } else if (curso != undefined && status != undefined) {
-
-        if (!isNaN(status) || !isNaN(curso)) {
-            statusCode = 400
-            dadosAluno.message = 'Não foi possivel processar pois os dados de entrada que foram enviados não corresponde ao exigido, confira o valor, pois não pode ser vazio e precisa ser caracteres'
-        } else {
-            let alunosPorCurso = funcoes.getAlunosCurso(curso, listaDeAlunos.alunos);
-            alunos = funcoes.getStatusAluno(status, alunosPorCurso.aluno);
-        }
-
-        if (alunos) {
-            statusCode = 200
-            dadosAluno = alunos
-        } else {
-            statusCode = 400
-        }
-
-    } else {
-        alunos = funcoes.getListaAlunos()
+    } else{
+        aluno = listaAlunos.getListaAlunos()
     }
 
+    // Tratamento de validação de requisição
     if (alunos) {
         statusCode = 200
-        dadosAluno = alunos
+        dadosAluno = aluno
     } else {
-        statusCode = 400
+        statusCode = 500
     }
-
-    response.status(statusCode)
     response.json(dadosAluno)
+    response.status(statusCode)
 })
 app.get('/v1/lion-school/alunos/:matricula', cors(), async function (request, response, next) {
 

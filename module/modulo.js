@@ -61,7 +61,7 @@ const alunos = require('../json/alunos.js');
  
  }
 
- const getAlunosCurso = function(cursoSigla, listaAlunos){
+ const getAlunosCurso = function(cursoSigla){
 
    listaDadosAlunoJSON = false;
     let siglaCurso = cursoSigla;

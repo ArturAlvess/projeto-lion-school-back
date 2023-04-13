@@ -74,7 +74,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
     let siglaCurso = request.query.sigla;
     let statusAluno = request.query.status;
 
-    if (siglaCurso != undefined && statusAluno != undefined) {
+    if (siglaCurso != undefined && statusAluno == undefined) {
         if (siglaCurso == '' || siglaCurso == undefined || !isNaN(siglaCurso)) {
             statusCode = 400;
             dadosSiglaCurso.messsage = 'Sigla do curso inválida! Verifique se a mesma está correta.'
@@ -82,7 +82,7 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
             aluno = listaAlunos.getAlunosCurso(siglaCurso)
         }
 
-    } else if (statusAluno != undefined && statusAluno != undefined) {
+    } else if (statusAluno != undefined && siglaCurso == undefined) {
         if (statusAluno == '' || statusAluno == undefined || !isNaN(statusAluno)) {
             statusCode = 400;
             dadosStatusAluno.messsage = 'Status do aluno inválido, verifique se o mesmo está correto.'

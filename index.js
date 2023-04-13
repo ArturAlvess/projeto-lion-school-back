@@ -95,8 +95,8 @@ app.get('/v1/lion-school/alunos', cors(), async function (request, response, nex
             statusCode = 400;
             dadosSiglaCurso.messsage = 'Sigla do curso ou status inválido! Verifique se a mesma está correta.'
         } else {
-            let alunosCurso = funcoes.getAlunosCurso(siglaCurso, listaAlunos.alunos)
-            alunos = funcoes.getStatusAluno(statusAluno, alunosCurso.aluno)
+            let alunosCurso = funcoes.getAlunosCurso(siglaCurso)
+            alunos = funcoes.getStatusAluno(statusAluno)
 
             if (alunos) {
                 statusCode = 200

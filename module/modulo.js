@@ -92,7 +92,7 @@ const alunos = require('../json/alunos.js');
     return alunos
 
  }
- const getStatusAluno = function(status, listaAlunos){
+ const getStatusAluno = function(status){
 
    listaDadosAlunoJSON = false;
    let statusAluno = status;

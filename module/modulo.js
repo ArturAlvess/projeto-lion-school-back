@@ -39,13 +39,13 @@ const getListaAlunos = function () {
 
 }
 
-const getSigla = function(palavraNaoAbreviada){
+const getSigla = function (palavraNaoAbreviada) {
    let materias = palavraNaoAbreviada.replace(/\s(de|da|a|das)\s/g, ' ');
    materias = materias.split(' ');
    const initials = materias.map(materia => materia.charAt(0).toUpperCase());
    return initials.join('');
 
-} 
+}
 const getAlunoMatricula = function (matricula) {
 
    let alunoMatricula = matricula
@@ -68,7 +68,7 @@ const getAlunoMatricula = function (matricula) {
             conclusao: lista.curso[0].conclusao
          }
 
-         lista.curso[0].disciplinas.forEach(function(listaDisciplina){
+         lista.curso[0].disciplinas.forEach(function (listaDisciplina) {
             listaInformacoesJson.disciplinas = informacoesDisciplinasArray
 
             informacoesDisciplinasJson = {
@@ -121,16 +121,18 @@ const getAlunosCurso = function (cursoSigla) {
 
 
 }
- 
- const getStatusAluno = function(status){
+
+const getStatusAluno = function (status) {
 
 
-   listaDadosAlunoJSON = false;
+   listaDadosAlunoJSON = {};
    let statusAluno = status;
    let alunos = {}
    let informacoes = []
 
-   listaAlunos.alunos.forEach(function (lista) {
+   let aluno = listaAlunos.alunos
+
+   aluno.forEach(function (lista) {
       if (statusAluno.toUpperCase() == lista.status.toUpperCase()) {
 
          listaDadosAlunoJSON = {}

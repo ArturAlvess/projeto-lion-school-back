@@ -156,7 +156,7 @@ const getStatusAluno = function (status) {
    }
    return alunos
 }
-
+console.log(getStatusAluno('Finalizado'))
 module.exports = {
    getListaCursos,
    getListaAlunos,
